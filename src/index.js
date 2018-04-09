@@ -7,11 +7,18 @@ import registerServiceWorker from './registerServiceWorker';
 
 import {currencies} from './store/reducer';
 import Router from './components/router';
+import {loadState, saveState} from './store/actions';
 
+const persistedState = loadState();
 const store = createStore(
     currencies,
+    persistedState,
     applyMiddleware(thunk)
 );
+
+store.subscribe(() => {
+    saveState(store.getState());
+});
 
 render(
     <Provider store={store}>

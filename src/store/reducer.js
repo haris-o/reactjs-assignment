@@ -15,8 +15,7 @@ export function currencies(state = initialState, action = {}) {
                 currenciesObject: action.currencies.reduce((accumulator, current) => {
                     accumulator[current.id] = current;
                     return accumulator;
-                }, {}),
-                selectedCurrency: {}
+                }, {})
             });
 
         case actions.CURRENCY_RECEIVE:

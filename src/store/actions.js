@@ -5,35 +5,35 @@ export const actions = {
     FIAT_CHANGE: 'FIAT_CHANGE'
 };
 
-function receiveCurrencies(currencies){
+const receiveCurrencies = (currencies) => {
     return {
         type: actions.CURRENCIES_RECEIVE,
         currencies
     };
-}
+};
 
-function receiveCurrency(currency){
+const receiveCurrency = (currency) => {
     return {
         type: actions.CURRENCY_RECEIVE,
         currency
     };
-}
+};
 
-export function selectCurrency(currencyId){
+export const selectCurrency = (currencyId) => {
     return {
         type: actions.CURRENCY_SELECT,
         currencyId
     }
-}
+};
 
-export function changeFiat(fiat){
+export const changeFiat = (fiat) => {
     return {
         type: actions.FIAT_CHANGE,
         fiat
     };
-}
+};
 
-export function fetchCurrencies(fiat = 'USD'){
+export const fetchCurrencies = (fiat = 'USD') => {
     return dispatch => {
         return fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=100&convert=${fiat}`)
             .then(res => {
@@ -43,10 +43,9 @@ export function fetchCurrencies(fiat = 'USD'){
             })
             .catch(err => console.log(err));
     }
-}
+};
 
-export function fetchCurrency(id, fiat = 'USD'){
-    console.log('fetched currency ' + id + ' with fiat ' + fiat);
+export const fetchCurrency = (id, fiat = 'USD') => {
     return dispatch => {
         return fetch(`https://api.coinmarketcap.com/v1/ticker/${id}/?convert=${fiat}`)
             .then(res => {
@@ -56,4 +55,29 @@ export function fetchCurrency(id, fiat = 'USD'){
             })
             .catch(err => console.log(err));
     }
-}
+};
+
+export const loadState = () => {
+    try {
+        const state = localStorage.getItem('state');
+        if(!state){
+            return undefined;
+        }
+        else{
+            return JSON.parse(state);
+        }
+    }
+    catch(err){
+        return undefined;
+    }
+};
+
+export const saveState = (state) => {
+    try {
+        const serializedState = JSON.stringify(state);
+        localStorage.setItem('state', serializedState);
+    }
+    catch(err){
+        console.log(err);
+    }
+};
