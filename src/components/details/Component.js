@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom';
 
 class Component extends React.Component {
     constructor(props){
@@ -37,7 +38,9 @@ class Component extends React.Component {
             <div className='container text-center'>
                 <div className='well'>
                     <div className='row'>
-                        <button onClick={this.onRefreshClick}
+                        <button
+                            className='btn btn-default'
+                            onClick={this.onRefreshClick}
                         >
                             Refresh
                         </button>
@@ -78,6 +81,10 @@ class Component extends React.Component {
 
                     <label>Available Supply</label>
                     <p>{available_supply}</p>
+
+                    <Link to='/' className='btn btn-default'>
+                        Go to list
+                    </Link>
                 </div>
             </div>
         );

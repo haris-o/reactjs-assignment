@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 const Component = ({fiat, changeFiat}) => {
     const onSelectChange = (e) => {
@@ -22,6 +23,10 @@ const Component = ({fiat, changeFiat}) => {
                             <option value='CNY'>CNY</option>
                         </select>
                     </div>
+
+                    <Link to='/' className='btn btn-default'>
+                        Go to list
+                    </Link>
                 </div>
             </div>
         </div>

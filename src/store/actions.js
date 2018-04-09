@@ -1,3 +1,5 @@
+const url = 'https://api.coinmarketcap.com/v1';
+
 export const actions = {
     CURRENCIES_RECEIVE: 'CURRENCIES_RECEIVE',
     CURRENCY_RECEIVE: 'CURRENCY_RECEIVE',
@@ -35,7 +37,7 @@ export const changeFiat = (fiat) => {
 
 export const fetchCurrencies = (fiat = 'USD') => {
     return dispatch => {
-        return fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=100&convert=${fiat}`)
+        return fetch(`${url}/ticker/?limit=100&convert=${fiat}`)
             .then(res => {
                 if(res.ok){
                     res.json().then(currencies => dispatch(receiveCurrencies(currencies)));
@@ -47,7 +49,7 @@ export const fetchCurrencies = (fiat = 'USD') => {
 
 export const fetchCurrency = (id, fiat = 'USD') => {
     return dispatch => {
-        return fetch(`https://api.coinmarketcap.com/v1/ticker/${id}/?convert=${fiat}`)
+        return fetch(`${url}/ticker/${id}/?convert=${fiat}`)
             .then(res => {
                 if(res.ok){
                     res.json().then(currencyList => dispatch(receiveCurrency(currencyList[0])));
