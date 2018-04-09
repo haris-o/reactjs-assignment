@@ -25,24 +25,37 @@ class Component extends React.Component {
                 accessor: 'percent_change_24h'
             }
         ];
+
+        this.getRowProps = this.getRowProps.bind(this);
+        this.onRefreshClick = this.onRefreshClick.bind(this);
     }
 
     componentDidMount() {
         this.props.fetchCurrencies(this.props.fiat);
     }
 
-    render() {
-        let {currencies, fiat, fetchCurrencies, selectCurrency, history} = this.props;
+    getRowProps(state, rowInfo, column) {
+        return ({
+            onClick: e => {
+                e.preventDefault();
+                this.props.selectCurrency(rowInfo.original.id);
+                this.props.history.push('/details');
+            }
+        });
+    }
 
+    onRefreshClick(e) {
+        e.preventDefault();
+        this.props.fetchCurrencies(this.props.fiat);
+    }
+
+    render() {
         return (
             <div className='container'>
                 <div className='row text-center'>
                     <button
                         className='btn btn-primary'
-                        onClick={e => {
-                            e.preventDefault();
-                            fetchCurrencies(fiat);
-                        }}
+                        onClick={this.onRefreshClick}
                     >
                         Refresh
                     </button>
@@ -51,19 +64,13 @@ class Component extends React.Component {
                 <ReactTable
                     className='-striped -highlight'
                     columns={this.columns}
-                    data={currencies}
-                    getTrProps={(state, rowInfo, column) => ({
-                        onClick: e => {
-                            e.preventDefault();
-                            selectCurrency(rowInfo.original.id);
-                            history.push('/details');
-                        }
-                    })}
+                    data={this.props.currencies}
+                    getTrProps={this.getRowProps}
                 />
             </div>
         );
     }
-};
+}
 
 Component.propTypes = {
     currencies: PropTypes.array,

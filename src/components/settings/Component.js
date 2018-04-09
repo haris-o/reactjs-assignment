@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Component = ({fiat, changeFiat}) => {
     const onSelectChange = (e) => {
@@ -25,6 +26,11 @@ const Component = ({fiat, changeFiat}) => {
             </div>
         </div>
     );
+};
+
+Component.propTypes = {
+    fiat: PropTypes.string.isRequired,
+    changeFiat: PropTypes.func.isRequired
 };
 
 export default Component;
