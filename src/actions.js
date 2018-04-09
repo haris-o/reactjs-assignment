@@ -46,6 +46,7 @@ export function fetchCurrencies(fiat = 'USD'){
 }
 
 export function fetchCurrency(id, fiat = 'USD'){
+    console.log('fetched currency ' + id + ' with fiat ' + fiat);
     return dispatch => {
         return fetch(`https://api.coinmarketcap.com/v1/ticker/${id}/?convert=${fiat}`)
             .then(res => {

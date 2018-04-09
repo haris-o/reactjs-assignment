@@ -1,20 +1,40 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
+import thunk from 'redux-thunk';
+import {render} from 'react-dom';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import { currencies } from './reducer';
-
-const store = createStore(currencies);
+import {createStore, applyMiddleware} from 'redux';
+import {Route, BrowserRouter} from 'react-router-dom';
 
 import Container from './Container';
+import Header from './Header';
+import Settings from './Settings';
+import Details from './Details';
+import {currencies} from './reducer';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
+const store = createStore(
+    currencies,
+    applyMiddleware(thunk)
+);
+
+render(
     <Provider store={store}>
-        <Container />
+        <BrowserRouter>
+            <div>
+                <Header/>
+                <Route exact path='/' component={Container}/>
+                <Route exact path='/details' component={Details}/>
+                <Route exact path='/settings' component={Settings}/>
+            </div>
+        </BrowserRouter>
     </Provider>,
     document.getElementById('root')
 );
+
+/*
+
+            <Route exact path='/details' component={Details} />
+            <Route exact path='/settings' component={Settings} />
+ */
 
 registerServiceWorker();

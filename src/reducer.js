@@ -32,6 +32,9 @@ export function currencies(state = initialState, action = {}) {
         case actions.FIAT_CHANGE:
             return Object.assign({}, state, {
                 fiat: action.fiat
-            })
+            });
+
+        default:
+            return state;
     }
 }
