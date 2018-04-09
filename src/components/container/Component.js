@@ -1,28 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
-import {
-    fetchCurrencies, fetchCurrency,
-    selectCurrency
-} from "./actions";
-
-const mapStateToProps = state => {
-    return {
-        currencies: state.currenciesArray,
-        fiat: state.fiat
-    }
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchCurrencies: (fiat) => dispatch(fetchCurrencies(fiat)),
-        selectCurrency: (id) => dispatch(selectCurrency(id))
-    }
-};
-
-class Container extends React.Component {
+class Component extends React.Component {
     constructor(props) {
         super(props);
 
@@ -46,11 +26,9 @@ class Container extends React.Component {
         ];
     }
 
-
     componentDidMount() {
         this.props.fetchCurrencies(this.props.fiat);
     }
-
 
     render() {
         let {currencies, fiat, fetchCurrencies, selectCurrency, history} = this.props;
@@ -68,6 +46,7 @@ class Container extends React.Component {
                         Refresh
                     </button>
                 </div>
+
                 <ReactTable
                     className='-striped -highlight'
                     columns={this.columns}
@@ -85,4 +64,4 @@ class Container extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Container);
+export default Component;
