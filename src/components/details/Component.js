@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 class Component extends React.Component {
     constructor(props){
@@ -81,6 +82,12 @@ class Component extends React.Component {
             </div>
         );
     }
+};
+
+Component.propTypes = {
+    currency: PropTypes.object.isRequired,
+    fiat: PropTypes.string.isRequired,
+    fetchCurrency: PropTypes.func.isRequired
 };
 
 export default Component;

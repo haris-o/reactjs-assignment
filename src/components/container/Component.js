@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
@@ -16,7 +17,7 @@ class Component extends React.Component {
                 accessor: 'symbol'
             },
             {
-                Header: 'Price ' + this.props.fiat,
+                Header: 'Price ' + this.props.fiat || 'USD',
                 accessor: 'price_' + this.props.fiat.toLowerCase()
             },
             {
@@ -62,6 +63,14 @@ class Component extends React.Component {
             </div>
         );
     }
-}
+};
+
+Component.propTypes = {
+    currencies: PropTypes.array,
+    fiat: PropTypes.string.isRequired,
+    fetchCurrencies: PropTypes.func.isRequired,
+    selectCurrency: PropTypes.func.isRequired,
+    history: PropTypes.object
+};
 
 export default Component;
