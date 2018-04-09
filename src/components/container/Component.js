@@ -54,7 +54,7 @@ class Component extends React.Component {
             <div className='container'>
                 <div className='row text-center'>
                     <button
-                        className='btn btn-primary'
+                        className='btn btn-default'
                         onClick={this.onRefreshClick}
                     >
                         Refresh

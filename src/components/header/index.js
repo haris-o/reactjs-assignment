@@ -6,9 +6,10 @@ const Component = () => {
         <nav className="navbar navbar-default">
             <div className="container-fluid">
                 <ul className="nav navbar-nav">
-                    <li className="active">
-                        <Link to='/settings' className='btn btn-primary'>
+                    <li>
+                        <Link to='/settings' className='btn btn-default'>
                             <span className="glyphicon glyphicon-cog" />
+                            <span> Change Currency</span>
                         </Link>
                     </li>
                 </ul>
