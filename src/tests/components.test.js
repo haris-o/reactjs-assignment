@@ -34,11 +34,13 @@ it('renders Container without crashing', () => {
 it('renders Details without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
-        <Details
-            currency={mockCurrency}
-            fetchCurrency={mockAction}
-            fiat={'USD'}
-        />, div);
+        <BrowserRouter>
+            <Details
+                currency={mockCurrency}
+                fetchCurrency={mockAction}
+                fiat={'USD'}
+            />
+        </BrowserRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
 });
 
@@ -53,6 +55,12 @@ it('renders Router without crashing', () => {
 
 it('renders Settings without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<Settings/>, div);
+    ReactDOM.render(
+        <BrowserRouter>
+            <Settings
+                changeFiat={mockAction}
+                fiat={'USD'}
+            />
+        </BrowserRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
 });
